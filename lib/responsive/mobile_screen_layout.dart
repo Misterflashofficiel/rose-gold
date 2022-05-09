@@ -48,12 +48,13 @@ class _MobileScreenLayoutState extends State<MobileScreenLayout> {
         onPageChanged: onPageChanged,
       ),
       bottomNavigationBar: CurvedNavigationBar(
-        index: 2,
+        index: 0,
         height: 50.0,
         items: <Widget>[
           Icon(Icons.home, size: 30,color:Colors.white),
           Icon(Icons.add, size: 30,color:Colors.white),
           Icon(Icons.perm_identity, size: 30,color:Colors.white),
+          Icon(Icons.email, size: 30,color:Colors.white),
         ],
         color: Colors.black,
         buttonBackgroundColor: Colors.black,

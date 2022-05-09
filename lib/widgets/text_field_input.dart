@@ -23,10 +23,10 @@ class TextFieldInput extends StatelessWidget {
 
     return TextField(
       controller: textEditingController,
-      style: TextStyle(color:Colors.white),
+      style: TextStyle(color:Colors.black),
       decoration: InputDecoration(
         hintStyle: TextStyle(
-          color: Colors.white,
+          color: Colors.black,
         ),
         hintText: hintText,
         border: inputBorder,

@@ -16,7 +16,7 @@ class FireStoreMethods {
     try {
       String photoUrl =
           await StorageMethods().uploadImageToStorage('posts', file, true);
-      String postId = const Uuid().v1(); // creates unique id based on time
+      String postId = Uuid().v1(); // creates unique id based on time
       Post post = Post(
         description: description,
         uid: uid,
@@ -63,7 +63,7 @@ class FireStoreMethods {
     try {
       if (text.isNotEmpty) {
         // if the likes list contains the user uid, we need to remove it
-        String commentId = const Uuid().v1();
+        String commentId =  Uuid().v1();
         _firestore
             .collection('posts')
             .doc(postId)

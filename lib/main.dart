@@ -5,13 +5,18 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:rose_gold/a/passecode.dart';
 import 'package:rose_gold/accueil_general/page_accueil.dart';
+import 'package:rose_gold/booking/bookAkA.dart';
 import 'package:rose_gold/providers/user_provider.dart';
 import 'package:rose_gold/responsive/mobile_screen_layout.dart';
 import 'package:rose_gold/responsive/responsive_layout.dart';
 import 'package:rose_gold/responsive/web_screen_layout.dart';
 import 'package:rose_gold/screens/login_screen.dart';
+import 'package:rose_gold/abonnement/payment.dart';
+import 'package:rose_gold/screens/signup_screen.dart';
 import 'package:rose_gold/utils/colors.dart';
 import 'package:uuid/uuid.dart';
+
+import 'abonnement/abonnementvip.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -44,11 +49,11 @@ class MyApp extends StatelessWidget {
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
-        title: 'Inne',
+        title: 'rosegold',
         theme: ThemeData.dark().copyWith(
           scaffoldBackgroundColor: mobileBackgroundColor,
         ),
-        home: AccueilPage(),
+        home: LoginScreen(),
       ),
     );
   }
