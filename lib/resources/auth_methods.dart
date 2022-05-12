@@ -65,14 +65,14 @@ class AuthMethods {
       }
     } on FirebaseAuthException  catch (err) {
       if (err.code ==  'invalid-email'){
-        res = "The email is badly formatted";
+        res = "L email est mal saisie";
       } else if (err.code ==  'Mot de passe court'){
         res = "Le mot de passe est court";
       }
     }
 
     catch (err) {
-      return err.toString();
+      return 'verifier les saisies';
     }
     return res;
   }
@@ -95,7 +95,7 @@ class AuthMethods {
         res = "Please enter all the fields";
       }
     } catch (err) {
-      return err.toString();
+      return "Compte introuvable";
     }
     return res;
   }

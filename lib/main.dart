@@ -10,6 +10,7 @@ import 'package:rose_gold/providers/user_provider.dart';
 import 'package:rose_gold/responsive/mobile_screen_layout.dart';
 import 'package:rose_gold/responsive/responsive_layout.dart';
 import 'package:rose_gold/responsive/web_screen_layout.dart';
+import 'package:rose_gold/screens/feed_screen.dart';
 import 'package:rose_gold/screens/login_screen.dart';
 import 'package:rose_gold/abonnement/payment.dart';
 import 'package:rose_gold/screens/signup_screen.dart';
@@ -17,6 +18,7 @@ import 'package:rose_gold/utils/colors.dart';
 import 'package:uuid/uuid.dart';
 
 import 'abonnement/abonnementvip.dart';
+import 'drawer/drawer.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

@@ -25,7 +25,7 @@ class _BookingCalendarRSState extends State<BookingCalendarRS> {
   DatePickerController _controller = DatePickerController();
   TextEditingController _controllerr = TextEditingController();
   DateTime _selectedValue = DateTime.now();
-  int selectedCard = TIME_SLOT.length;
+  int selectedCard = 1;
   bool isLoading = false;
 
   void postbook(String uid, String username, String email,String postId) async {
@@ -63,27 +63,6 @@ class _BookingCalendarRSState extends State<BookingCalendarRS> {
       );
     }
   }
-
-  Future<String> BookList(String postId, String uid, List likes) async {
-    String res = "Some error occurred";
-    try {
-      if (likes.contains(uid)) {
-        // if the likes list contains the user uid, we need to remove it
-        FirebaseFirestore.instance.collection('Bookk').doc(postId).update({
-          'Date': FieldValue.arrayRemove([uid])
-        });
-      } else {
-        // else we need to add uid to the likes array
-        FirebaseFirestore.instance.collection('Bookk').doc(postId).update({
-          'likes': FieldValue.arrayUnion([uid])
-        });
-      }
-      res = 'success';
-    } catch (err) {
-      res = err.toString();
-    }
-    return res;
-  }
   @override
   void initState() {
     super.initState();
@@ -92,26 +71,26 @@ class _BookingCalendarRSState extends State<BookingCalendarRS> {
   @override
   Widget build(BuildContext context) {
     final UserProvider userProvider = Provider.of<UserProvider>(context);
-
-   selectedCard = TIME_SLOT.length - selectedCard;
    return Scaffold(
         floatingActionButton: FloatingActionButton(
-          child: Icon(Icons.replay),
-          onPressed: () {
-            _controller.animateToSelection();
-          },
-        ),
-        appBar: AppBar(
-          actions: [FlatButton(onPressed: ()=> postbook(
+          backgroundColor: Colors.pink,
+          child: Icon(Icons.send),
+          onPressed: ()=> postbook(
             userProvider.getUser.uid,
             userProvider.getUser.username,
             userProvider.getUser.email,
-            userProvider.getUser.photoUrl
-          ), child: Text('Valider'))],
+            userProvider.getUser.photoUrl,
+          )
         ),
+
         body: Container(
           padding: EdgeInsets.all(20.0),
-          color: Colors.blueGrey[100],
+          decoration : BoxDecoration(
+              gradient: LinearGradient(
+                  colors: [Colors.black,Colors.pink, Colors.white70,Colors.pink]
+              ),
+              borderRadius: BorderRadius.circular(34)
+          ) ,
           child: Column(
             children: <Widget>[
               Padding(
@@ -136,41 +115,35 @@ class _BookingCalendarRSState extends State<BookingCalendarRS> {
                 ),
               ),
               Expanded(
-                child:FutureBuilder(
-                  future: ,
-                  builder: (context,
-                      AsyncSnapshot<QuerySnapshot<Map<String, dynamic>>> snapshot) {
-                    if (snapshot.connectionState == ConnectionState.waiting) {
-                      return const Center(
-                        child: CircularProgressIndicator(),
-                      );
-                    }
-                    return  GridView.builder(
-                        itemCount: TIME_SLOT.length,
+                child: GridView.builder(
+                        itemCount:TIME_SLOT.length ,
                         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                           crossAxisCount: 3,
                         ),
                         itemBuilder: (context, index)=>Card(
-                          color: snapshot.hasData  ? Colors.white10 : selectedCard == index ? Colors.pink : Colors.black,
+                          color:  selectedCard == index ? Colors.pink : Colors.black ,
                           child: GridTile(
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.center,
                               mainAxisAlignment:MainAxisAlignment.center ,
                               children: [
                                 GestureDetector(
-                                  onTap:  snapshot.hasData  ? null :(){
-                                    selectedCard = index;
+                                  onTap:(){
+                                    setState(() {
+                                      selectedCard = index;
+                                    });
                                   },
                                   child: Column(
-                                    children: [
-                                      Text('${TIME_SLOT.elementAt(index)}',style: TextStyle(color: Colors.white),),
-                                      Text( snapshot.hasData  ? 'Disponible' :'Reseré',style: TextStyle(color: Colors.amber),),],
-                                  ),)
+                                  children: [
+                                  Text('${TIME_SLOT.elementAt(index)}',style: TextStyle(color: Colors.white),),
+                                  Text(selectedCard == index?'Reservation':'Disponible',style: TextStyle(color: Colors.amber),),],
+                                     ),
+                                  ),
+
                               ],
                             ),
                           ),
-                        ));
-                  },
+                        )
                 ),
 
 

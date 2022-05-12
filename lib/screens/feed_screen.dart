@@ -23,19 +23,15 @@ class _FeedScreenState extends State<FeedScreen> {
       appBar: width > webScreenSize
           ? null
           : AppBar(
-              backgroundColor: Colors.black,
-              centerTitle: true,
-              title: Text('ANNONCES', style: TextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.bold),),
-              actions: [
-                IconButton(
-                  icon: const Icon(
-                    Icons.messenger_outline,
-                    color: primaryColor,
-                  ),
-                  onPressed: () {},
-                ),
-              ],
+          backgroundColor:  Colors.pink,
+          centerTitle: true,
+          title: Text('ANNONCES', style: TextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.bold),),
+          flexibleSpace: Container(
+            decoration: BoxDecoration(
+              gradient: LinearGradient(colors: [ Colors.black,Colors.black,Colors.pink,Colors.black,Colors.black]),
             ),
+          ),
+      ),
       body: StreamBuilder(
         stream: FirebaseFirestore.instance.collection('posts').snapshots(),
         builder: (context,
@@ -45,13 +41,12 @@ class _FeedScreenState extends State<FeedScreen> {
               child: CircularProgressIndicator(),
             );
           }
+
           return ListView.builder(
             itemCount: snapshot.data!.docs.length,
             itemBuilder: (ctx, index) => Container(
               color: Colors.white,
               margin: EdgeInsets.symmetric(
-                horizontal: width > webScreenSize ? width * 0.3 : 0,
-                vertical: width > webScreenSize ? 15 : 0,
               ),
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
@@ -61,7 +56,7 @@ class _FeedScreenState extends State<FeedScreen> {
               ),
             ),
           );
-        },
+        }
       ),
     );
   }

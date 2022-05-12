@@ -96,7 +96,7 @@ class _MyApppState extends State<MyAppp> {
                                     'notify_url': 'https://mondomaine.com/notify/'
                                   },
                                   paymentData: <String, dynamic> {
-                                    'transaction_id': 'YOUR_TRANSACTION_ID',
+                                    'transaction_id': transactionId,
                                     'amount': 100,
                                     'currency': 'XOF',
                                     'channels': 'ALL',
